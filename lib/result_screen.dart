@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/constants.dart';
+import 'welcome_screen.dart';
+import 'bmi_brain.dart';
 
 class ResultScreen extends StatelessWidget {
+  final int height;
+  final int weight;
+  final int age;
+  final gender genderType;
+  ResultScreen({this.height, this.weight, this.age, this.genderType});
   @override
   Widget build(BuildContext context) {
+    double result =
+        bmi(height: height, weight: weight, age: age, genderType: genderType);
     return Scaffold(
       body: Container(
         color: kBackGroundColor,
@@ -33,20 +42,20 @@ class ResultScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Text(
-                    'STATUS',
+                    presentCondition(result),
                     style: TextStyle(color: Colors.amberAccent, fontSize: 25),
                   ),
                   Text(
-                    '180',
+                    result.round().toString(),
                     style: TextStyle(
-                        fontSize: 40,
+                        fontSize: 70,
                         color: Colors.white,
                         fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    'description',
+                    suggestionBasedOnBmi(result),
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.lightBlueAccent,
                       fontSize: 20,
                     ),
                   )
